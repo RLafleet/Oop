@@ -1,0 +1,14 @@
+Earth:Земля
+Poge:пог
+cat:koshka
+chicken:курица
+joke:шутка
+pig:свинья
+purple:фиолет,фиолетовый
+red:красный
+road:doroga
+some:chto-to
+the red road:krasnaya doroga
+yabloko:apple
+yammy:вкусный,сладкий,ням
+yet:yzhe

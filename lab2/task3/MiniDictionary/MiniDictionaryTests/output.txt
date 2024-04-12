@@ -1,0 +1,4 @@
+apple duple:jabloko
+cat:koshka moshka
+koshka moshka:...
+road:doroga

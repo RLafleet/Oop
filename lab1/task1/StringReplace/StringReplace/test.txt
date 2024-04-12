@@ -1,0 +1,149 @@
+#include "Replace.h"
+
+bool CheckArguments(int& argc)
+{
+    if (argc != 5)
+    {
+        std::cout << "Usage: <inputFileName> <outputFileName> <replacement string> <replace string>" << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool IsInFileGood(const std::ifstream& file)
+{
+    if (!file.good())
+    {
+        std::cout << "Error reading" << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool IsOutFileGood(const std::ofstream& file)
+{
+    if (!file.good())
+    {
+        std::cout << "Error writing" << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool CanOpenFiles(std::ifstream& inputFileName, std::ofstream& outputFile)
+{
+    std::string inputFileName = inputFile;
+    std::string outputFileName = outputFile;
+
+    inputFile.open(inputFileName);
+    outputFile.open(outputFileName);
+    if (!inputFile.is_open() || !outputFile.is_open())
+    {
+        std::cout << "Error while opening file" << std::endl;
+        return false;
+    }
+    return true;
+}
+
+std::string Replace(const std::string& subject,
+    const std::string& searchString, const std::string& replacementString)
+{
+    if (subject.empty() || searchString.empty())
+    {
+        return subject;
+    }
+
+    size_t pos = 0;
+
+    std::string result;
+    while (pos < subject.length())
+    {
+        size_t foundPos = subject.find(searchString, pos);
+        size_t substrLength;
+        // ????????? 
+        bool replacementStringNotFound = false;
+
+        if (foundPos == std::string::npos)
+        {
+            substrLength = subject.length() - pos;
+            replacementStringNotFound = true;
+        }
+        else
+        {
+            substrLength = foundPos - pos;
+        }
+
+        result.append(subject, pos, substrLength);
+
+        if (replacementStringNotFound)
+        {
+            break;
+        }
+
+        result.append(replacementString);
+        pos = foundPos + searchString.length();
+    }
+    return result;
+}
+
+bool ReplaceLines(std::ifstream& inputFile, std::ofstream& outputFile, 
+    const std::string& searchString, const std::string& replacementString)  
+{
+    if (!IsInFileGood(inputFile) || !IsOutFileGood(outputFile))
+    {
+        return false;
+    }
+    
+    std::string subject;
+    while (std::getline(inputFile, subject))
+    {
+        outputFile << Replace(subject, searchString, replacementString) << std::endl;
+    }
+
+    outputFile.flush();
+    if (!IsOutFileGood(outputFile))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool PrepareFiles(int argc, char argv, std::string[] argValues)
+{
+    if (!CheckArguments(argc))
+    {
+        return false;
+    }
+
+    argValues[0] = argv[1];
+    argValues[1] = argv[2];
+    argValues[2] = argv[3];
+    argValues[3] = argv[4];
+
+    return true;
+    
+}
+
+bool StringReplace(std::string[] argValues)
+{
+    std::ifstream inputFile = argValues[0];
+    std::ofstream outputFile = argValues[1];
+    std::string searchString = argValues[2];
+    std::string replacementString = argValues[3];
+
+    std::cout << inputFile << " " << outputFile << " " << searchString << " " << replacementString << std::endl;
+
+    if (!CanOpenFiles(inputFile, outputFile))
+    {
+        return false;
+    }
+
+   
+    
+    if (!ReplaceLines(inputFile, outputFile, searchString, replacementString))
+    {
+        return false;
+    }
+    return true; 
+}
