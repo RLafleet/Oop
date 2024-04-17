@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include "Operation.h" 
 #include "Calculator.h"
 
@@ -8,9 +8,9 @@ using std::string;
 using std::map;
 using std::string;
 
-bool Calculator::AddVar(const string& identificator) 
+bool Calculator::AddVar(const string& identificator)
 {
-    if (m_vars.find(identificator) != m_vars.end()) 
+    if (m_vars.find(identificator) != m_vars.end())
     {
         std::cout << "Variable '" << identificator << "' already exists." << std::endl;
         return false;
@@ -22,8 +22,9 @@ bool Calculator::AddVar(const string& identificator)
     return true;
 }
 
-bool Calculator::AddLet(const string& identificator, double value)
+bool Calculator::AddLet(const string& identificator, const string& identificator2)
 {
+    double value = GetVariableValue(identificator2);
     Variable new_var(identificator, value);
     m_vars[identificator] = new_var;
 
@@ -83,26 +84,64 @@ double CalculateOperation(double variableValue, Operation operation, double temp
     return result;
 }
 
+double Calculator::GetVariableValue(const string& str) const
+{
+    double value;
+    
+    try 
+    {
+        value = std::stod(str);
+    }
+    catch (...) 
+    {
+        value = NAN;
+    }
+    
+    if (std::isnan(value))
+    {
+        auto it = m_vars.find(str);
+        if (it != m_vars.end())
+        {
+            value = it->second.GetValue();
+        }
+    }
+
+    return value;
+}
+
+double Calculator::GetFunctionValue(const string& str) const
+{
+    double value = NAN;
+    auto it = m_funcs.find(str);
+    if (it != m_funcs.end())
+    {
+        try
+        {
+            value = std::stod(it->second.GetVar1());
+        }
+        catch (...)
+        {
+            value = GetFunctionValue(it->second.GetVar1());
+        }
+    }
+
+    return value;
+}
+
 double Calculator::CalculateFunctionValue(const Function& func) const
 {
-    double variableValue = NAN;
     string temp = func.GetVar1();
+    double value = GetVariableValue(temp);
+    double variableValue = (std::isnan(value)) ? GetFunctionValue(temp) : value;
+    //double variableValue = value;
+
     Operation operation;
-    auto it = m_vars.find(temp);
-    if (it != m_vars.end()) 
+    if (func.GetOperation() != Operation::INVALID)
     {
-        variableValue = it->second.GetValue();
-        if (func.GetOperation() != Operation::INVALID)
-        {
-            temp = func.GetVar2();
-            operation = func.GetOperation();
-            it = m_vars.find(temp);
-            if (it != m_vars.end())
-            {
-                double tempValue = it->second.GetValue();
-                variableValue = CalculateOperation(variableValue, operation, tempValue);
-            }
-        }
+        temp = func.GetVar2();
+        operation = func.GetOperation();
+        double tempValue = GetVariableValue(temp);
+        variableValue = CalculateOperation(variableValue, operation, tempValue);
     }
     return variableValue;
 }
@@ -151,6 +190,7 @@ void Calculator::EnumVariables(Callback callback, const string& identificator1) 
     {
         const string& name = pair.first;
         const Variable& var = pair.second;
+
         callback(name, var.GetValue());
     }
 }

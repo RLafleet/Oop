@@ -7,12 +7,12 @@ Variable::Variable(const std::string& name, double value)
 {
 }
 
-string Variable::GetName() const 
-{ 
-	return m_name; 
+string Variable::GetName() const
+{
+	return m_name;
 }
 
-double Variable::GetValue() const 
-{ 
-	return m_value; 
+double Variable::GetValue() const
+{
+	return m_value;
 }

@@ -5,7 +5,7 @@
 using std::string;
 using std::map;
 
-class Variable 
+class Variable
 {
 public:
     Variable() = default;

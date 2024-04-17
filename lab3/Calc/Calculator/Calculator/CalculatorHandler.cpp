@@ -26,10 +26,9 @@ bool CalculatorHandler::CommandHandler(const string& line)
 	}
 	else if (command =="let")
 	{
-        double value;
-        if ((action.size() == 4) && (value = std::stod(action[3])))
+        if (action.size() == 4)
         {
-            AddLet(action[1], value);
+            AddLet(action[1], action[3]);
         }
 
 	}
@@ -88,16 +87,16 @@ bool CalculatorHandler::AddVar(const string& identificator)
     }
 }
 
-bool CalculatorHandler::AddLet(const string& identificator, double value)
+bool CalculatorHandler::AddLet(const string& identificator, const string& identificator2)
 {
-    if (m_calc.AddLet(identificator, value))
+    if (m_calc.AddLet(identificator, identificator2))
     {
-        std::cout << "Added a let: " << identificator << " = " << value << std::endl;
+        std::cout << "Added a let: " << identificator << " = " << identificator2 << std::endl;
         return true;
     }
     else
     {
-        std::cout << "Cannot add a let: " << identificator << " = " << value << std::endl;
+        std::cout << "Cannot add a let: " << identificator << " = " << identificator2 << std::endl;
         return false;
     }
 }
@@ -135,6 +134,11 @@ bool CalculatorHandler::Print(const string& identificator) const
     m_calc.EnumVariables([](const string& name, const double var)
         {
             std::cout << name << " = " << var << std::endl;
+        }, identificator);
+
+    m_calc.EnumFunctions([](const string& name, const double func)
+        {
+            std::cout << name << " = " << func << std::endl;
         }, identificator);
     return true;    
 }
@@ -204,7 +208,6 @@ std::vector<std::string> CalculatorHandler::SplitString(const std::string& input
         }
         else 
         {
-            std::cout << token << " token" << std::endl;
             result.push_back(token);
         }
     }

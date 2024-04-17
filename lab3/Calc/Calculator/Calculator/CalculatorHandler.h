@@ -33,7 +33,7 @@ private:
 
     bool AddVar(const string& identificator);
 
-    bool AddLet(const string& identificator, double value);
+    bool AddLet(const string& identificator, const string& identificator2);
 
     bool AddFunction(const string& identificator1, const string& identificator2, Operation operation, const string& identificator3);
 
