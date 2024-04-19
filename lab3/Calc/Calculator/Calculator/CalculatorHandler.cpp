@@ -7,9 +7,26 @@ CalculatorHandler::CalculatorHandler(Calculator& calc)
 {
 }
 
-bool CalculatorHandler::CommandHandler(const string& line)
+void CalculatorHandler::Handle(std::istream& in, std::ostream& out)
 {
+    std::string comand;
+    while (getline(std::cin, comand))
+    {
+        if (!CommandHandler(comand, out))
+        {
+            out << "Unknown command" << std::endl;
+        }
+    }
+}
+
+bool CalculatorHandler::CommandHandler(const string& line, std::ostream& out)
+{
+    if (line.empty())
+    {
+        return false;
+    }
     std::vector<std::string> action = SplitString(line);
+    
     std::string command = action[0];
 
     if (!CheckCommandExists(command))
@@ -19,21 +36,27 @@ bool CalculatorHandler::CommandHandler(const string& line)
 
 	if (command == "var")
 	{
-        if (action.size() == 2)
+        if (action.size() != 2)
         {
-            AddVar(action[1]);
+            return false;
         }
+        AddVar(action[1]);
 	}
 	else if (command =="let")
 	{
-        if (action.size() == 4)
+        if (action.size() != 4)
         {
-            AddLet(action[1], action[3]);
+            return false;
         }
-
+        AddLet(action[1], action[3]);
 	}
     else if (command == "fn")
     {
+        if ((action.size() != 4) && (action.size() != 6))
+        {
+            return false;
+        }
+
         if (action.size() == 4)
         {
             AddFunctionUnar(action[1], action[3]);
@@ -42,28 +65,28 @@ bool CalculatorHandler::CommandHandler(const string& line)
         {
             Operation operation = StringToOperation(action[4]);
 
-            AddFunction(action[1], action[3], operation, action[5]);
+            AddFunction(action[1], action[3], operation,    action[5]);
         }
     }
 	else if (command == "print")
 	{
         if (action.size() == 2)
         {
-            Print(action[1]);
+            Print(action[1], out);
         }
 	}
 	else if (command == "printvars")
 	{
         if (action.size() == 1)
         {
-            PrintVars();
+            PrintVars(out);
         }
 	}
 	else if (command == "printfns")
 	{
         if (action.size() == 1)
         {
-            PrintFunctions();
+            PrintFunctions(out);
         }
 	}
     else
@@ -105,7 +128,7 @@ bool CalculatorHandler::AddFunction(const string& identificator1, const string& 
 {
     if (m_calc.AddFunction(identificator1, identificator2, operation, identificator3))
     {
-        std::cout << "Added a function" << std::endl;
+        std::cout << "Added a function: " << identificator1 << std::endl;
         return true;
     }
     else
@@ -119,7 +142,7 @@ bool CalculatorHandler::AddFunctionUnar(const string& identificator1, const stri
 {
     if (m_calc.AddFunctionUnar(identificator1, identificator2))
     {
-        std::cout << "Added a function" << std::endl;
+        std::cout << "Added a function: " << identificator1 << std::endl;
         return true;
     }
     else
@@ -129,44 +152,44 @@ bool CalculatorHandler::AddFunctionUnar(const string& identificator1, const stri
     }
 }
 
-bool CalculatorHandler::Print(const string& identificator) const
+bool CalculatorHandler::Print(const string& identificator, std::ostream& out) const
 {
-    m_calc.EnumVariables([](const string& name, const double var)
+    m_calc.EnumVariables([](const string& name, const double var, std::ostream& out)
         {
-            std::cout << name << " = " << var << std::endl;
-        }, identificator);
+            out << name << " = " << var << std::endl;
+        }, identificator, out);
 
-    m_calc.EnumFunctions([](const string& name, const double func)
+    m_calc.EnumFunctions([](const string& name, const double func, std::ostream& out)
         {
-            std::cout << name << " = " << func << std::endl;
-        }, identificator);
+            out << name << " = " << func << std::endl;
+        }, identificator, out);
     return true;    
 }
 
-bool CalculatorHandler::PrintVars() const
+bool CalculatorHandler::PrintVars(std::ostream& out) const
 {
     const string EMPTY_STR = "";
-    m_calc.EnumVariables([](const string& name, const double varValue)
+    m_calc.EnumVariables([](const string& name, const double varValue, std::ostream& out)
         {
-            std::cout << name << " = " << varValue << std::endl;
-        }, EMPTY_STR);
+            out << name << " = " << varValue << std::endl;
+        }, EMPTY_STR, out);
     return true;
 }
 
-bool CalculatorHandler::PrintFunctions() const
+bool CalculatorHandler::PrintFunctions(std::ostream& out) const
 {
     const string EMPTY_STR = "";
-    m_calc.EnumFunctions([](const string& name, const double funcValue)
+    m_calc.EnumFunctions([](const string& name, const double funcValue, std::ostream& out)
         {
             if (std::isnan(funcValue))
             {
-                std::cout << name << " undefined" << std::endl;
+                out << name << " undefined" << std::endl;
             }
             else
             {
-                std::cout << name << " = " << funcValue << std::endl;
+                out << name << " = " << funcValue << std::endl;
             }
-        }, EMPTY_STR);
+        }, EMPTY_STR, out);
     return true;
 } 
 

@@ -5,12 +5,6 @@ int main()
 	Calculator calculator;
 	CalculatorHandler calculatorHandler = CalculatorHandler(calculator);
 	std::string comand;
-	while (getline(std::cin, comand))
-	{
-		if (!calculatorHandler.CommandHandler(comand))
-		{
-			std::cout << "Unknown command" << std::endl;
-		}
-	}
+	calculatorHandler.Handle(std::cin, std::cout);
 	return EXIT_SUCCESS;
 }

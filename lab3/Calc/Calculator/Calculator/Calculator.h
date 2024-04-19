@@ -8,7 +8,7 @@
 #include "Function.h"
 #include "Variable.h"
 
-typedef void (*Callback) (const std::string& substrOne, const double substrTwo);
+typedef void (*Callback) (const std::string& substrOne, const double substrTwo, std::ostream& out);
 
 class Calculator 
 {
@@ -21,17 +21,19 @@ public:
 
     bool AddFunctionUnar(const std::string& identificator1, const std::string& value);
 
-    void EnumVariables(Callback callback, const std::string& identificator1) const;
-    
     double GetVariableValue(const string& str) const;
 
     double GetFunctionValue(const string& str) const;
 
-    void EnumFunctions(Callback callback, const std::string& identificator1) const;
+    void EnumFunctions(Callback callback, const std::string& identificator1, std::ostream& out) const;
+
+    void EnumVariables(Callback callback, const std::string& identificator1, std::ostream& out) const;
 
 private:
     std::map<std::string, Variable> m_vars = {};
     std::map<std::string, Function> m_funcs = {};
+
+    bool ValidIdentificator(const std::string& identificator) const;
 
     double CalculateFunctionValue(const Function& func) const;
 };

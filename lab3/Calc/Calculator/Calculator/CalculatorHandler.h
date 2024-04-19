@@ -9,17 +9,11 @@ class CalculatorHandler
 {
 public:
     explicit CalculatorHandler(Calculator& calc);
-
-    bool CommandHandler(const string& command);
+    void Handle(std::istream& in, std::ostream& out);
 
 private:
-    const std::map<std::string, Operation> OPERATIONS_MAP = 
-    {
-            {"+", Operation::ADDITION},
-            {"-", Operation::SUBTRACTION},
-            {"*", Operation::MULTIPLICATION},
-            {"/", Operation::DIVISION},
-    };
+    bool CommandHandler(const string& command, std::ostream& out);
+    
     const std::vector<std::string> COMMANDS = {
             "var",
             "let",
@@ -39,11 +33,11 @@ private:
 
     bool AddFunctionUnar(const string& identificator1, const string& identificator2);
 
-    bool Print(const string& identificator) const;
+    bool Print(const string& identificator, std::ostream& out) const;
 
-    bool PrintVars() const;
+    bool PrintVars(std::ostream& out) const;
 
-    bool PrintFunctions() const;
+    bool PrintFunctions(std::ostream& out) const;
 
     bool CheckCommandExists(const std::string& command) const;
     

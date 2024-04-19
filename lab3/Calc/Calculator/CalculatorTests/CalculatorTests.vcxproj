@@ -127,7 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Calculator\Calculator.cpp" />
+    <ClCompile Include="..\Calculator\CalculatorHandler.cpp" />
+    <ClCompile Include="..\Calculator\Function.cpp" />
+    <ClCompile Include="..\Calculator\Variable.cpp" />
     <ClCompile Include="CalculatorTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Calculator\Calculator.h" />
+    <ClInclude Include="..\Calculator\CalculatorHandler.h" />
+    <ClInclude Include="..\Calculator\Function.h" />
+    <ClInclude Include="..\Calculator\Operation.h" />
+    <ClInclude Include="..\Calculator\Variable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
