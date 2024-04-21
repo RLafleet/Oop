@@ -13,15 +13,6 @@ public:
 
 private:
     bool CommandHandler(const string& command, std::ostream& out);
-    
-    const std::vector<std::string> COMMANDS = {
-            "var",
-            "let",
-            "fn",
-            "print",
-            "printfns",
-            "printvars",
-    };
 
     Calculator& m_calc;
 

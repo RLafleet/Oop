@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{e34916b4-f9a3-4608-9758-037a35aca6e6}</ProjectGuid>
-    <RootNamespace>Calculator</RootNamespace>
+    <ProjectGuid>{9d75fd24-fb8e-4ac3-aeb2-9948887b5451}</ProjectGuid>
+    <RootNamespace>geometricFigures</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,21 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Calculator.cpp" />
-    <ClCompile Include="CalculatorHandler.cpp" />
-    <ClCompile Include="Function.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Variable.cpp" />
+    <ClCompile Include="CPoint.h" />
+    <ClCompile Include="CRectangle.h" />
+    <ClCompile Include="geometricFigures.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Calculator.h" />
-    <ClInclude Include="CalculatorHandler.h" />
-    <ClInclude Include="Function.h" />
-    <ClInclude Include="Operation.h" />
-    <ClInclude Include="Variable.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="todo.txt" />
+    <ClInclude Include="CCircle.h" />
+    <ClInclude Include="CLineSegment.h" />
+    <ClInclude Include="CTriangle.h" />
+    <ClInclude Include="ISolidShape.h" />
+    <ClInclude Include="IShape.h" />
+    <ClInclude Include="stdUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

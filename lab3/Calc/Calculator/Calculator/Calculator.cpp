@@ -1,15 +1,20 @@
 ﻿#include <iostream>
 #include "Operation.h" 
 #include "Calculator.h"
-
 #include <sstream>
 
 using std::string;
 using std::map;
 using std::string;
+using std::unique_ptr;
 
 bool Calculator::ValidIdentificator(const string& identificator) const
 {
+    if (std::find(COMMANDS.begin(), COMMANDS.end(), identificator) != COMMANDS.end())
+    {
+        return false;
+    }
+
     char ch = identificator[0];
     if ((ch >= '0' && ch <= '9'))
     {
@@ -37,8 +42,9 @@ bool Calculator::AddVar(const string& identificator)
         std::cout << "Variable '" << identificator << "' already exists" << std::endl;
         return false;
     }
-    Variable new_var(identificator, NAN);
-    m_vars[identificator] = new_var;
+
+    unique_ptr<Variable> new_var(new Variable(identificator, NAN));
+    m_vars[identificator] = std::move(new_var);
 
     return true;
 }
@@ -56,8 +62,8 @@ bool Calculator::AddLet(const string& identificator, const string& identificator
     }
 
     double value = GetVariableValue(identificator2);
-    Variable new_var(identificator, value);
-    m_vars[identificator] = new_var;
+    unique_ptr<Variable> new_var(new Variable(identificator, value));
+    m_vars[identificator] = std::move(new_var);
 
     return true;
 }
@@ -79,16 +85,16 @@ bool Calculator::AddFunction(const string& identificator1, const string& identif
         return false;
     }
     
-    Function new_fn(identificator1, identificator2, operation, identificator3);
-    m_funcs[identificator1] = new_fn;
+    unique_ptr<Function> new_fn(new Function(identificator1, identificator2, operation, identificator3));
+    m_funcs[identificator1] = std::move(new_fn);
 
     return true;
 }
 
 bool Calculator::AddFunctionUnar(const string& identificator1, const string& identificator2)
 {
-    Function new_fn(identificator1, identificator2);
-    m_funcs[identificator1] = new_fn;
+    unique_ptr<Function> new_fn(new Function(identificator1, identificator2));
+    m_funcs[identificator1] = std::move(new_fn);
 
     return true;
 }
@@ -134,7 +140,7 @@ double Calculator::GetVariableValue(const string& str) const
         auto it = m_vars.find(str);
         if (it != m_vars.end())
         {
-            value = it->second.GetValue();
+            value = it->second->GetValue();
         }
     }
 
@@ -143,7 +149,7 @@ double Calculator::GetVariableValue(const string& str) const
         auto it = m_funcs.find(str);
         if (it != m_funcs.end())
         {
-            value = CalculateFunctionValue(it->second);
+            value = CalculateFunctionValue(*it->second);
         }
     }
 
@@ -158,11 +164,11 @@ double Calculator::GetFunctionValue(const string& str) const
     {
         try
         {
-            value = std::stod(it->second.GetVar1());
+            value = std::stod(it->second->GetVar1());
         }
         catch (...)
         {
-            value = GetFunctionValue(it->second.GetVar1());
+            value = GetFunctionValue(it->second->GetVar1());
         }
     }
     return value;
@@ -194,7 +200,7 @@ void Calculator::EnumFunctions(Callback callback, const string& identificator1, 
         for (const auto& pair : m_funcs)
         {
             const string& name = pair.first;
-            const Function& func = pair.second;
+            const Function& func = *pair.second;
             if (name == identificator1)
             {
                 callback(name, CalculateFunctionValue(func), out);
@@ -205,7 +211,7 @@ void Calculator::EnumFunctions(Callback callback, const string& identificator1, 
     for (const auto& pair : m_funcs)
     {
         const string& name = pair.first;
-        const Function& func = pair.second;
+        const Function& func = *pair.second;
         callback(name, CalculateFunctionValue(func), out);
     }
 }
@@ -217,7 +223,7 @@ void Calculator::EnumVariables(Callback callback, const string& identificator1, 
         for (const auto& pair : m_vars)
         {
             const string& name = pair.first;
-            const Variable& var = pair.second;
+            const Variable& var = *pair.second;
             if (name == identificator1)
             {
                 callback(name, var.GetValue(), out);
@@ -228,7 +234,7 @@ void Calculator::EnumVariables(Callback callback, const string& identificator1, 
     for (const auto& pair : m_vars)
     {
         const string& name = pair.first;
-        const Variable& var = pair.second;
+        const Variable& var = *pair.second;
 
         callback(name, var.GetValue(), out);
     }

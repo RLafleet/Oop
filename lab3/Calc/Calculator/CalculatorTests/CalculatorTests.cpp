@@ -378,7 +378,7 @@ TEST_CASE("Init func with let success") {
     std::cout.rdbuf(oldCout);
 
     std::string expectedOutput =
-        "Added a let: " + let + "\n"
+        "Added a let: " + let + " = " + value + "\n"
         "Added a function: " + func + "\n"
         "Xplus = " + value + "\n";
 

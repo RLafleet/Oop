@@ -4,13 +4,15 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <memory> 
+#include <vector>
 #include "Operation.h"
 #include "Function.h"
 #include "Variable.h"
 
 typedef void (*Callback) (const std::string& substrOne, const double substrTwo, std::ostream& out);
 
-class Calculator 
+class Calculator
 {
 public:
     bool AddVar(const std::string& identificator);
@@ -30,8 +32,8 @@ public:
     void EnumVariables(Callback callback, const std::string& identificator1, std::ostream& out) const;
 
 private:
-    std::map<std::string, Variable> m_vars = {};
-    std::map<std::string, Function> m_funcs = {};
+    std::map<std::string, std::unique_ptr<Variable>> m_vars = {};
+    std::map<std::string, std::unique_ptr<Function>> m_funcs = {}; 
 
     bool ValidIdentificator(const std::string& identificator) const;
 
