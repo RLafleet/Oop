@@ -164,21 +164,29 @@ double Calculator::GetVariableValue(const string& str) const
 
 double Calculator::GetFunctionValue(const string& str) const
 {
-    double value = NAN;
-    auto it = m_funcs.find(str);
-    if (it != m_funcs.end())
-    {
-        try
-        {
-            value = std::stod(it->second->GetVar1());
+    std::string currentExpr = str;
+
+    while (true) {
+        auto it = m_funcs.find(currentExpr);
+        if (it != m_funcs.end()) {
+            std::stringstream ss(it->second->GetVar1());
+            double value;
+            if (ss >> value) {
+                return value;
+            }
+            else {
+                currentExpr = it->second->GetVar1();
+            }
         }
-        catch (...)
-        {
-            value = GetFunctionValue(it->second->GetVar1());
+        else {
+            break; 
         }
     }
-    return value;
+
+    return NAN;
 }
+
+
 
 double Calculator::CalculateFunctionValue(const Function& func) const
 {

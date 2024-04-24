@@ -384,3 +384,23 @@ TEST_CASE("Init func with let success") {
 
     REQUIRE(mockOutput.str() == expectedOutput);
 }
+/*
+TEST_CASE("Test generated test program output") {
+
+    // Сравнение полученного вывода с ожидаемым результатом
+    std::ifstream mockInput("test_program.txt");
+    std::ostringstream expectedOutput("test_output.txt");
+    Calculator calculator;
+    CalculatorHandler calculatorCommandParser = CalculatorHandler(calculator);
+    std::streambuf* origCin = std::cin.rdbuf(mockInput.rdbuf());
+
+    std::ostringstream mockOutput;
+    std::streambuf* oldCout = std::cout.rdbuf(mockOutput.rdbuf());
+
+    calculatorCommandParser.Handle(mockInput, mockOutput);
+    std::cin.rdbuf(origCin);
+    std::cout.rdbuf(oldCout);
+
+    REQUIRE(mockOutput.str() == expectedOutput.str());
+}
+*/
