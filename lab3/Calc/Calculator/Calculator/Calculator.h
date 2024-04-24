@@ -37,6 +37,8 @@ private:
 
     bool ValidIdentificator(const std::string& identificator) const;
 
+    bool IsIdentificatorExists(const std::string& identificator) const;
+
     double CalculateFunctionValue(const Function& func) const;
 };
 

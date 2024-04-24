@@ -24,25 +24,31 @@ bool Calculator::ValidIdentificator(const string& identificator) const
     return true;
 }
 
+bool Calculator::IsIdentificatorExists(const string& identificator) const
+{
+    if (m_funcs.find(identificator) != m_funcs.end())
+    {
+        std::cout << "Function with that identificator '" << identificator << "' already exists" << std::endl;
+        return false;
+    }
+
+    if (m_vars.find(identificator) != m_vars.end())
+    {
+        std::cout << "Variable with that identificator '" << identificator << "' already exists" << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
 bool Calculator::AddVar(const string& identificator)
 {
-    if (!ValidIdentificator(identificator))
+    if (!ValidIdentificator(identificator) || 
+        !IsIdentificatorExists(identificator))
     {
         return false;
     }
-
-    if (m_funcs.find(identificator) != m_funcs.end()) 
-    {
-        std::cout << "Function '" << identificator << "' already exists" << std::endl;
-        return false;
-    }
-
-    if (m_vars.find(identificator) != m_vars.end()) 
-    {
-        std::cout << "Variable '" << identificator << "' already exists" << std::endl;
-        return false;
-    }
-
+    
     unique_ptr<Variable> new_var(new Variable(identificator, NAN));
     m_vars[identificator] = std::move(new_var);
 
@@ -57,7 +63,7 @@ bool Calculator::AddLet(const string& identificator, const string& identificator
     }
 
     if (m_funcs.find(identificator) != m_funcs.end()) {
-        std::cout << "Function '" << identificator << "' already exists" << std::endl;
+        std::cout << "Function with that identificator '" << identificator << "' already exists" << std::endl;
         return false;
     }
 
@@ -70,18 +76,11 @@ bool Calculator::AddLet(const string& identificator, const string& identificator
 
 bool Calculator::AddFunction(const string& identificator1, const string& identificator2, Operation operation, const string& identificator3)
 {
-    if (!ValidIdentificator(identificator1) || !ValidIdentificator(identificator2) || !ValidIdentificator(identificator3))
+    if (!ValidIdentificator(identificator1) || 
+        !ValidIdentificator(identificator2) || 
+        !ValidIdentificator(identificator3) || 
+        !IsIdentificatorExists(identificator1))
     {
-        return false;
-    }
-
-    if (m_funcs.find(identificator1) != m_funcs.end()) {
-        std::cout << "Function '" << identificator1 << "' already exists" << std::endl;
-        return false;
-    }
-
-    if (m_vars.find(identificator1) != m_vars.end()) {
-        std::cout << "Variable '" << identificator1 << "' already exists" << std::endl;
         return false;
     }
     
@@ -93,6 +92,13 @@ bool Calculator::AddFunction(const string& identificator1, const string& identif
 
 bool Calculator::AddFunctionUnar(const string& identificator1, const string& identificator2)
 {
+    if (!ValidIdentificator(identificator1) ||
+        !IsIdentificatorExists(identificator1))
+    {
+        std::cout << "false";
+        return false;
+    }
+
     unique_ptr<Function> new_fn(new Function(identificator1, identificator2));
     m_funcs[identificator1] = std::move(new_fn);
 

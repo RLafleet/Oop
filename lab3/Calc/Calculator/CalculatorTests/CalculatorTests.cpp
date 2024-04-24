@@ -83,7 +83,7 @@ TEST_CASE("Init nan var already exist func error") {
     std::string expectedOutput = 
         "Added a variable: " + var + "\n"
         "Added a function: " + func + "\n"
-        "Function '" + var2 + "' already exists\n"
+        "Function with that identificator '" + var2 + "' already exists\n"
         "Cannot add a variable: " + var2 + "\n";
 
     REQUIRE(mockOutput.str() == expectedOutput);
@@ -111,7 +111,7 @@ TEST_CASE("Init nan var already exist var error") {
     std::string expectedOutput =
         "Added a variable: " + var + "\n"
         "Added a variable: " + var1 + "\n"
-        "Variable '" + var2 + "' already exists\n"
+        "Variable with that identificator '" + var2 + "' already exists\n"
         "Cannot add a variable: " + var2 + "\n";
 
     REQUIRE(mockOutput.str() == expectedOutput);
