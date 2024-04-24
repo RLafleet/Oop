@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="geometricFigures.cpp">
+    <ClCompile Include="GeometricFigures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CRectangle.h">
@@ -23,6 +23,9 @@
     </ClCompile>
     <ClCompile Include="CPoint.h">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stdUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,6 @@
-// geometricFigures.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+
+const std::string COMMAND_INPUT_ARGS = "cin";
 
 struct Args 
 {
@@ -30,7 +29,7 @@ void CheckForOpenFile(std::ifstream& inputFile)
 {
     if (!inputFile.is_open())
     {
-        throw std::runtime_error("Failed to open input stream file");
+        throw std::runtime_error("Failed to open input file");
     }
 }
 
@@ -39,7 +38,15 @@ int main(int argc, char* argv[])
     try
     {
         Args args = ParseArgs(argc, argv);
-        std::cout << args.inputStr << std::endl;
+
+        if (args.inputStr != COMMAND_INPUT_ARGS)
+        {
+
+        }
+        else
+        {
+
+        }
     }
     catch (std::exception& e)
     {

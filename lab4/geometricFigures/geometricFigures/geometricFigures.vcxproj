@@ -129,12 +129,14 @@
   <ItemGroup>
     <ClCompile Include="CPoint.h" />
     <ClCompile Include="CRectangle.h" />
-    <ClCompile Include="geometricFigures.cpp" />
+    <ClCompile Include="GeometricFigures.cpp" />
+    <ClCompile Include="ShapeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCircle.h" />
     <ClInclude Include="CLineSegment.h" />
     <ClInclude Include="CTriangle.h" />
+    <ClInclude Include="ShapeManager.h" />
     <ClInclude Include="ISolidShape.h" />
     <ClInclude Include="IShape.h" />
     <ClInclude Include="stdUtils.h" />
