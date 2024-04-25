@@ -384,7 +384,7 @@ TEST_CASE("Init func with let success") {
 
     REQUIRE(mockOutput.str() == expectedOutput);
 }
-/*
+
 TEST_CASE("Test generated test program output") {
 
     // Сравнение полученного вывода с ожидаемым результатом
@@ -403,4 +403,3 @@ TEST_CASE("Test generated test program output") {
 
     REQUIRE(mockOutput.str() == expectedOutput.str());
 }
-*/

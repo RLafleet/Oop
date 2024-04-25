@@ -13,12 +13,12 @@ class ShapeManager
 public:
 	void ConstructShape(const std::string str);
 
-	std::unique_ptr<IShape>GetShapeMaxSize() const;
+	std::shared_ptr<IShape>GetShapeMaxSize() const;
 
-	std::unique_ptr<IShape>GetShapeMinPerimetr() const;
+	std::shared_ptr<IShape>GetShapeMinPerimetr() const;
 
 private:
-	std::vector<std::unique_ptr<ISshape>> m_shapes = {};
+	std::vector<std::shared_ptr<ISshape>> m_shapes = {};
 
 };
 

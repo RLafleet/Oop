@@ -64,8 +64,7 @@ bool CalculatorHandler::CommandHandler(const string& line, std::ostream& out)
         if (action.size() == 6)
         {
             Operation operation = StringToOperation(action[4]);
-
-            AddFunction(action[1], action[3], operation,    action[5]);
+            AddFunction(action[1], action[3], operation, action[5]);
         }
     }
 	else if (command == "print")
