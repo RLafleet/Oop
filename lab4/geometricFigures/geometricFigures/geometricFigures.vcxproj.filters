@@ -18,36 +18,42 @@
     <ClCompile Include="GeometricFigures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CRectangle.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="ShapeManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CPoint.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShapeManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CRectangle.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IShape.h">
+    <ClInclude Include="ShapeManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ISolidShape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CLineSegment.h">
+    <ClInclude Include="ShapeCreator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CCircle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CLineSegment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="CTriangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="stdUtils.h">
+    <ClInclude Include="CCanvas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ShapeManager.h">
+    <ClInclude Include="ICanvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICanvasDrawable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Users\apppp\Downloads\SFML-2.6.1\include\SFML\Graphics\CircleShape.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
