@@ -1,57 +1,30 @@
-#include <iostream>
+﻿#include <SFML/Graphics.hpp>
 
-const std::string COMMAND_INPUT_ARGS = "cin";
+using namespace sf;
 
-struct Args 
+int main()
 {
-    std::string inputStr;
-};
 
-Args ParseArgs(int argc, char* argv[])
-{
-    if (argc != 2)
+    RenderWindow window(VideoMode(400, 400), L"Новый проект", Style::Default);
+
+    window.setVerticalSyncEnabled(true);
+
+    CircleShape shape(100.f, 3);
+    shape.setPosition(100, 100);
+    shape.setFillColor(Color::Magenta);
+
+    while (window.isOpen())
     {
-        throw std::invalid_argument("Invalid count of arguments\nUsage: <input_str>");
-    }
-    
-    Args args;
-    args.inputStr = argv[1]; 
-    return args;
-}
-
-std::ifstream GetFileName(const std::string& inputStr)
-{
-    std::ifstream inputFile(inputStr);
-    return inputFile;
-}
-
-void CheckForOpenFile(std::ifstream& inputFile)
-{
-    if (!inputFile.is_open())
-    {
-        throw std::runtime_error("Failed to open input file");
-    }
-}
-
-int main(int argc, char* argv[])
-{
-    try
-    {
-        Args args = ParseArgs(argc, argv);
-
-        if (args.inputStr != COMMAND_INPUT_ARGS)
+        Event event;
+        while (window.pollEvent(event))
         {
-
+            if (event.type == Event::Closed)
+                window.close();
         }
-        else
-        {
 
-        }
+        window.clear(Color::Blue);
+        window.draw(shape);
+        window.display();
     }
-    catch (std::exception& e)
-    {
-        std::cout << e.what() << std::endl;
-        return EXIT_FAILURE;
-    }
-    return EXIT_SUCCESS;
+    return 0;
 }

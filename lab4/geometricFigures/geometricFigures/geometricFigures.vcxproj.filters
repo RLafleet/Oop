@@ -53,8 +53,5 @@
     <ClInclude Include="ICanvasDrawable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Users\apppp\Downloads\SFML-2.6.1\include\SFML\Graphics\CircleShape.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
