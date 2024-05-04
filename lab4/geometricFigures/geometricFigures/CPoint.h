@@ -1,13 +1,13 @@
-#ifndef INC_1_2_CPOINT_H
-#define INC_1_2_CPOINT_H
+#ifndef CPOINT_H
+#define CPOINT_H
 
-class CPoint
-{
+class CPoint {
 public:
-	CPoint(double xCord, double yCord) : m_xCord(xCord), m_yCord(yCord) {}
+    CPoint(double x, double y) : m_x(x), m_y(y) {}
 
-	double m_xCord;
-	double m_yCord;
+    double m_x;
+    double m_y;
 };
 
-#endif //INC_1_2_CPOINT_H
+
+#endif //CPOINT_H

@@ -1,23 +1,31 @@
-#pragma once
-#ifndef ISHAPE_H
-#define ISHAPE_H	
-#include "stdUtils.h"
+﻿#ifndef ISHAPE_H
+#define ISHAPE_H
 
+#include "utils.h"
+#include "ICanvasDrawable.h"
 
-class IShape 
+class IShape : public ICanvasDrawable 
 {
 public:
-	virtual double GetArea() const = 0;
+    virtual uint32_t GetOutlineColor() const = 0;
 
-	virtual double GetPerimeter() const = 0;
+    virtual ~IShape() = default;
 
-	virtual std::string ToString() const = 0;
+    virtual double GetArea() const = 0;
 
-	virtual uint32_t GetOutlineColor() const = 0;
+    virtual double GetPerimeter() const = 0;
 
-	virtual ~IShape() = default;
+    //Все методы чисто виртуальные. Ввести промежуточный класс shape и наследоваться от него
+    virtual std::string Info() const
+    {
+        std::stringstream ss;
+        ss << "Perimeter: " << GetPerimeter() << std::endl;
+        ss << "Area: " << GetArea() << std::endl;
+        ss << "OutlineColor: " << std::hex << std::setw(6) << std::setfill('0') << GetOutlineColor() << std::endl;
+        return ss.str();
+    };
+
+};
 
 
-}
-
-#endif // ISHAPE_H
+#endif //ISHAPE_H

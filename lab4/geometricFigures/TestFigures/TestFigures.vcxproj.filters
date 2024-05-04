@@ -15,75 +15,78 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GeometricFigures.cpp">
+    <ClCompile Include="TestFigures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShapeManager.cpp">
+    <ClCompile Include="..\geometricFigures\CPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CPoint.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CRectangle.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CCanvas.cpp">
+    <ClCompile Include="..\geometricFigures\CRectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShapeCreator.cpp">
+    <ClCompile Include="..\geometricFigures\CTriangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShapeController.cpp">
+    <ClCompile Include="..\geometricFigures\ShapeController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CCircle.cpp">
+    <ClCompile Include="..\geometricFigures\CCanvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CLineSegment.cpp">
+    <ClCompile Include="..\geometricFigures\CCircle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CRectangle.cpp">
+    <ClCompile Include="..\geometricFigures\CLineSegment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTriangle.cpp">
+    <ClCompile Include="..\geometricFigures\ShapeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\geometricFigures\ShapeCreator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShapeManager.h">
+    <ClInclude Include="..\geometricFigures\ShapeCreator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CCircle.h">
+    <ClInclude Include="..\geometricFigures\ShapeController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CLineSegment.h">
+    <ClInclude Include="..\geometricFigures\ISolidShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CTriangle.h">
+    <ClInclude Include="..\geometricFigures\IShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CCanvas.h">
+    <ClInclude Include="..\geometricFigures\ICanvasDrawable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ICanvas.h">
+    <ClInclude Include="..\geometricFigures\ICanvas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ICanvasDrawable.h">
+    <ClInclude Include="..\geometricFigures\CTriangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ShapeCreator.h">
+    <ClInclude Include="..\geometricFigures\CRectangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ShapeController.h">
+    <ClInclude Include="..\geometricFigures\CPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IShape.h">
+    <ClInclude Include="..\geometricFigures\CLineSegment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ISolidShape.h">
+    <ClInclude Include="..\geometricFigures\CCircle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils.h">
+    <ClInclude Include="..\geometricFigures\CCanvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geometricFigures\ShapeManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geometricFigures\utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

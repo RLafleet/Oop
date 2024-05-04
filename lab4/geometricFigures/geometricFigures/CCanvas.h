@@ -1,21 +1,25 @@
-#pragma once
-#include <utility>
+﻿#ifndef CCANVAS_H
+#define CCANVAS_H
 
 #include "ICanvas.h"
 
 class CCanvas : public ICanvas
 {
 public:
-	CCanvas(std::shared_ptr<sf::RenderWindow> window) : m_window(std::move(window)) {};
+    // Простые указатели
+    // Не нужно зависеть от RenderWindow а от RenderTarget
+    CCanvas(std::shared_ptr<sf::RenderWindow> window) : m_window(std::move(window)) {};
 
-	void DrawBorder();
+    void DrawLine(CPoint from, CPoint to, uint32_t lineColor);
 
-	void FillPolygon();
+    void FillPolygon(std::vector<CPoint>, uint32_t lineColor, uint32_t fillColor);
 
-	void DrawLine();
+    void DrawCircle(CPoint center, double radius, uint32_t lineColor);
 
-	void FillCircle();
-
+    void FillCircle(CPoint center, double radius, uint32_t fillColor);
 private:
-	std::shared_ptr<sf::RenderWindow> m_window;
+    std::shared_ptr<sf::RenderWindow> m_window;
 };
+
+
+#endif //CCANVAS_H
