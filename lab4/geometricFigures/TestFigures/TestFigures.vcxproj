@@ -133,7 +133,6 @@
     <ClCompile Include="..\geometricFigures\CCanvas.cpp" />
     <ClCompile Include="..\geometricFigures\CCircle.cpp" />
     <ClCompile Include="..\geometricFigures\CLineSegment.cpp" />
-    <ClCompile Include="..\geometricFigures\CPoint.cpp" />
     <ClCompile Include="..\geometricFigures\CRectangle.cpp" />
     <ClCompile Include="..\geometricFigures\CTriangle.cpp" />
     <ClCompile Include="..\geometricFigures\ShapeController.cpp" />

@@ -18,9 +18,6 @@
     <ClCompile Include="TestFigures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\geometricFigures\CPoint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\geometricFigures\CRectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

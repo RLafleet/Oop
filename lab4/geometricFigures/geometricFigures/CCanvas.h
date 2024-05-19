@@ -8,7 +8,7 @@ class CCanvas : public ICanvas
 public:
     // Простые указатели
     // Не нужно зависеть от RenderWindow а от RenderTarget
-    CCanvas(std::shared_ptr<sf::RenderWindow> window) : m_window(std::move(window)) {};
+    CCanvas(std::shared_ptr<sf::RenderTarget> window) : m_window(std::move(window)) {};
 
     void DrawLine(CPoint from, CPoint to, uint32_t lineColor);
 
@@ -18,7 +18,7 @@ public:
 
     void FillCircle(CPoint center, double radius, uint32_t fillColor);
 private:
-    std::shared_ptr<sf::RenderWindow> m_window;
+	std::shared_ptr<sf::RenderTarget> m_window;
 };
 
 

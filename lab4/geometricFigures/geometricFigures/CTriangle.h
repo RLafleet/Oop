@@ -15,9 +15,9 @@ public:
         m_outlineColor(outlineColor),
         m_fillColor(fillColor)
     {
-        double sideLineTriange1 = GetLine(m_vertex2, m_vertex1);
-        double sideLineTriange2 = GetLine(m_vertex3, m_vertex2);
-        double sideLineTriange3 = GetLine(m_vertex1, m_vertex3);
+		double sideLineTriange1 = GetTriangleSideLength(m_vertex2, m_vertex1);
+		double sideLineTriange2 = GetTriangleSideLength(m_vertex3, m_vertex2);
+		double sideLineTriange3 = GetTriangleSideLength(m_vertex1, m_vertex3);
 
         if (   (sideLineTriange1 + sideLineTriange2 <= sideLineTriange3) 
             || (sideLineTriange1 + sideLineTriange3 <= sideLineTriange2)
@@ -54,7 +54,7 @@ private:
     uint32_t m_fillColor;
 
     //Этот метод возращает не линию
-    static double GetLine(const CPoint& vertex1, const CPoint& vertex2);
+	static double GetTriangleSideLength(const CPoint& vertex1, const CPoint& vertex2);
 };
 
 

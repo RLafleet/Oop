@@ -10,9 +10,9 @@ double CTriangle::GetArea() const
 }
 
 double CTriangle::GetPerimeter() const {
-    double sideLineTriange1 = GetLine(m_vertex2, m_vertex1);
-    double sideLineTriange2 = GetLine(m_vertex3, m_vertex2);
-    double sideLineTriange3 = GetLine(m_vertex1, m_vertex3);
+    double sideLineTriange1 = GetTriangleSideLength(m_vertex2, m_vertex1);
+    double sideLineTriange2 = GetTriangleSideLength(m_vertex3, m_vertex2);
+    double sideLineTriange3 = GetTriangleSideLength(m_vertex1, m_vertex3);
 
     double perimeter = sideLineTriange1 + sideLineTriange2 + sideLineTriange3;
     return perimeter;
@@ -52,7 +52,7 @@ CPoint CTriangle::GetVertex3() const {
     return m_vertex3;
 }
 
-double CTriangle::GetLine(const CPoint& vertex1, const CPoint& vertex2)
+double CTriangle::GetTriangleSideLength(const CPoint& vertex1, const CPoint& vertex2)
 {
     // Выбрать одно из двух для периметра
     return std::sqrt(std::pow(vertex1.m_x - vertex2.m_x, 2) + std::pow(vertex1.m_y - vertex2.m_y, 2));

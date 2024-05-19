@@ -3,11 +3,10 @@
 
 #include "IShape.h"
 
-//protected выяснить как работает и поменять на public
-class ISolidShape : protected IShape
+// protected выяснить как работает и поменять на public
+class ISolidShape : public IShape
 {
-    virtual uint32_t GetFillColor() const = 0;
+	virtual uint32_t GetFillColor() const = 0;
 };
 
-
-#endif //ISOLIDSHAPE_H
+#endif // ISOLIDSHAPE_H
