@@ -23,19 +23,19 @@ CMyString::CMyString(const char* pString)
 {
 }
 
-CMyString::CMyString(const CMyString& other)
-	: CMyString(other.GetStringData(), other.GetLength())
+CMyString::CMyString(const CMyString& otherObj)
+	: CMyString(otherObj.GetStringData(), otherObj.GetLength())
 {
 }
 
-CMyString::CMyString(CMyString&& other) noexcept
-	: m_pData(other.m_pData)
-	, m_length(other.m_length)
-	, m_capacity(other.m_capacity)
+CMyString::CMyString(CMyString&& otherObj) noexcept
+	: m_pData(otherObj.m_pData)
+	, m_length(otherObj.m_length)
+	, m_capacity(otherObj.m_capacity)
 {
-	other.m_pData = EMPTY_STRING;
-	other.m_length = 0;
-	other.m_capacity = 1;
+	otherObj.m_pData = EMPTY_STRING;
+	otherObj.m_length = 0;
+	otherObj.m_capacity = 1;
 }
 
 CMyString::CMyString(const std::string& stlString)
@@ -82,11 +82,11 @@ void CMyString::Clear()
 	m_capacity = 1;
 }
 
-CMyString& CMyString::operator=(const CMyString& other)
+CMyString& CMyString::operator=(const CMyString& otherObj)
 {
-	if (std::addressof(other) != this)
+	if (std::addressof(otherObj) != this)
 	{
-		CMyString temp(other);
+		CMyString temp(otherObj);
 		std::swap(m_pData, temp.m_pData);
 		std::swap(m_length, temp.m_length);
 		std::swap(m_capacity, temp.m_capacity);
@@ -95,34 +95,34 @@ CMyString& CMyString::operator=(const CMyString& other)
 	return *this;
 }
 
-CMyString& CMyString::operator=(CMyString&& other) noexcept
+CMyString& CMyString::operator=(CMyString&& otherObj) noexcept
 {
-	if (std::addressof(other) != this)
+	if (std::addressof(otherObj) != this)
 	{
 		delete[] m_pData;
 		m_length = 0;
 		m_capacity = 1;
 		m_pData = EMPTY_STRING;
 
-		std::swap(m_pData, other.m_pData);
-		std::swap(m_length, other.m_length);
-		std::swap(m_capacity, other.m_capacity);
+		std::swap(m_pData, otherObj.m_pData);
+		std::swap(m_length, otherObj.m_length);
+		std::swap(m_capacity, otherObj.m_capacity);
 	}
 
 	return *this;
 }
 
-CMyString& CMyString::operator+=(CMyString const& other)
+CMyString& CMyString::operator+=(CMyString const& otherObj)
 {
-	if (std::addressof(other) == this)
+	if (std::addressof(otherObj) == this)
 	{
 		CMyString temp(*this);
 		return *this += temp;
 	}
 
-	if (m_length + other.m_length + 1 > m_capacity)
+	if (m_length + otherObj.m_length + 1 > m_capacity)
 	{
-		m_capacity = (m_length + other.m_length + 1) * 2;
+		m_capacity = (m_length + otherObj.m_length + 1) * 2;
 		char* newData = new char[m_capacity];
 		std::memcpy(newData, m_pData, m_length);
 		if (m_pData != EMPTY_STRING)
@@ -131,8 +131,8 @@ CMyString& CMyString::operator+=(CMyString const& other)
 		}
 		m_pData = newData;
 	}
-	std::memcpy(m_pData + m_length, other.m_pData, other.m_length + 1);
-	m_length += other.m_length;
+	std::memcpy(m_pData + m_length, otherObj.m_pData, otherObj.m_length + 1);
+	m_length += otherObj.m_length;
 	return *this;
 }
 
