@@ -377,100 +377,6 @@ TEST_CASE("Check the new str by getting two additional constructor str and std s
 	REQUIRE(result.GetCapacity() == 24);
 }
 
-TEST_CASE("Checking addition with char ptr with other additional position")
-{
-	CMyString str("Hello");
-	const char* charPtr = " World";
-	CMyString result = str + charPtr;
-	REQUIRE(result.GetLength() == 11);
-	REQUIRE_THAT(result.GetStringData(), Catch::Matchers::Equals("Hello World"));
-	REQUIRE(result.GetCapacity() == 24);
-}
-
-TEST_CASE("Check double capacity")
-{
-	CMyString str1("Hello");
-	size_t initialCapacity = str1.GetCapacity() * 2;
-	CMyString str2(" World!");
-
-	str1 += str2;
-
-	REQUIRE(str1.GetLength() == 12);
-	REQUIRE_THAT(str1.GetStringData(), Catch::Matchers::Equals("Hello World!"));
-	REQUIRE(str1.GetCapacity() >= initialCapacity * 2);
-}
-
-TEST_CASE("Double capacity with add")
-{
-	CMyString str1("Hello");
-	size_t initialCapacity = str1.GetCapacity();
-	CMyString str2(" World!");
-
-	CMyString result = str1 + str2;
-
-	REQUIRE(result.GetLength() == 12);
-	REQUIRE_THAT(result.GetStringData(), Catch::Matchers::Equals("Hello World!"));
-	REQUIRE(result.GetCapacity() >= initialCapacity * 2);
-}
-
-TEST_CASE("Capacity and data for cycle of same chars")
-{
-	CMyString str1("A");
-	size_t initialCapacity = str1.GetCapacity();
-	CMyString str2("B");
-
-	for (int i = 0; i < 20; ++i)
-	{
-		str1 += str2;
-	}
-
-	REQUIRE(str1.GetLength() == 21);
-	REQUIRE_THAT(str1.GetStringData(), Catch::Matchers::Equals("ABBBBBBBBBBBBBBBBBBBB"));
-	REQUIRE(str1.GetCapacity() >= initialCapacity);
-	REQUIRE(str1.GetCapacity() == 30);
-}
-
-TEST_CASE("Capacity and data for cycle of same chars, result to stt")
-{
-	CMyString str1("A");
-	size_t initialCapacity = str1.GetCapacity();
-	CMyString str2("B");
-	CMyString result = str1;
-
-	for (int i = 0; i < 20; ++i)
-	{
-		result = result + str2;
-	}
-
-	REQUIRE(result.GetLength() == 21);
-	REQUIRE_THAT(result.GetStringData(), Catch::Matchers::Equals("ABBBBBBBBBBBBBBBBBBBB"));
-	REQUIRE(result.GetCapacity() >= initialCapacity * 2);
-}
-
-TEST_CASE("Check equals operations with same text")
-{
-	CMyString str1("Test");
-	CMyString str2("Test");
-	REQUIRE(str1 == str2);
-	REQUIRE((str1 != str2) == false);
-}
-
-TEST_CASE("Check equals operations with different text")
-{
-	CMyString str1("Hello");
-	CMyString str2("World");
-	REQUIRE((str1 == str2) == false);
-	REQUIRE(str1 != str2);
-}
-
-TEST_CASE("Check equals operations with empty text")
-{
-	CMyString str1;
-	CMyString str2;
-	REQUIRE(str1 == str2);
-	REQUIRE((str1 != str2) == false);
-}
-
 TEST_CASE("Check equals operations with different length")
 {
 	CMyString str1("Test");
@@ -558,3 +464,98 @@ TEST_CASE("Check input and stringstream result")
 	REQUIRE(str.GetLength() == 5);
 	REQUIRE_THAT(str.GetStringData(), Catch::Matchers::Equals("Hello"));
 }
+
+TEST_CASE("Checking addition with char ptr with other additional position")
+{
+	CMyString str("Hello");
+	const char* charPtr = " World";
+	CMyString result = str + charPtr;
+	REQUIRE(result.GetLength() == 11);
+	REQUIRE_THAT(result.GetStringData(), Catch::Matchers::Equals("Hello World"));
+	REQUIRE(result.GetCapacity() == 24);
+}
+
+TEST_CASE("Check double capacity")
+{
+	CMyString str1("Hello");
+	size_t initialCapacity = str1.GetCapacity() * 2;
+	CMyString str2(" World!");
+
+	str1 += str2;
+
+	REQUIRE(str1.GetLength() == 12);
+	REQUIRE_THAT(str1.GetStringData(), Catch::Matchers::Equals("Hello World!"));
+	REQUIRE(str1.GetCapacity() >= initialCapacity * 2);
+}
+
+TEST_CASE("Double capacity with add")
+{
+	CMyString str1("Hello");
+	size_t initialCapacity = str1.GetCapacity();
+	CMyString str2(" World!");
+
+	CMyString result = str1 + str2;
+
+	REQUIRE(result.GetLength() == 12);
+	REQUIRE_THAT(result.GetStringData(), Catch::Matchers::Equals("Hello World!"));
+	REQUIRE(result.GetCapacity() >= initialCapacity * 2);
+}
+
+TEST_CASE("Capacity and data for cycle of same chars")
+{
+	CMyString str1("A");
+	size_t initialCapacity = str1.GetCapacity();
+	CMyString str2("Z");
+
+	for (int i = 0; i < 20; ++i)
+	{
+		str1 += str2;
+	}
+
+	REQUIRE(str1.GetLength() == 21);
+	REQUIRE_THAT(str1.GetStringData(), Catch::Matchers::Equals("AZZZZZZZZZZZZZZZZZZZZ"));
+	REQUIRE(str1.GetCapacity() >= initialCapacity);
+	REQUIRE(str1.GetCapacity() == 30);
+}
+
+TEST_CASE("Capacity and data for cycle of same chars, result to stt")
+{
+	CMyString str1("A");
+	size_t initialCapacity = str1.GetCapacity();
+	CMyString str2("Z");
+	CMyString result = str1;
+
+	for (int i = 0; i < 20; ++i)
+	{
+		result = result + str2;
+	}
+
+	REQUIRE(result.GetLength() == 21);
+	REQUIRE_THAT(result.GetStringData(), Catch::Matchers::Equals("AZZZZZZZZZZZZZZZZZZZZ"));
+	REQUIRE(result.GetCapacity() >= initialCapacity * 2);
+}
+
+TEST_CASE("Check equals operations with same text")
+{
+	CMyString str1("Test");
+	CMyString str2("Test");
+	REQUIRE(str1 == str2);
+	REQUIRE((str1 != str2) == false);
+}
+
+TEST_CASE("Check equals operations with different text")
+{
+	CMyString str1("Hello");
+	CMyString str2("World");
+	REQUIRE((str1 == str2) == false);
+	REQUIRE(str1 != str2);
+}
+
+TEST_CASE("Check equals operations with empty text")
+{
+	CMyString str1;
+	CMyString str2;
+	REQUIRE(str1 == str2);
+	REQUIRE((str1 != str2) == false);
+}
+
